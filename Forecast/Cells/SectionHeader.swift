@@ -11,7 +11,6 @@ class SectionHeader: UICollectionReusableView {
     
     private let txt: UILabel = {
         let label = UILabel()
-        label.text = "Label"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -36,6 +35,10 @@ class SectionHeader: UICollectionReusableView {
         NSLayoutConstraint.activate([
             txt.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
+    }
+    
+    func configure(title: String) {
+        txt.text = title
     }
 }
 

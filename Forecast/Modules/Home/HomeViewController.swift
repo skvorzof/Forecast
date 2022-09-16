@@ -13,6 +13,14 @@ class HomeViewController: UIViewController {
         case current
         case hourly
         case daily
+
+        func description() -> String {
+            switch self {
+            case .current: return "Current"
+            case .hourly: return "Hourly"
+            case .daily: return "Daily"
+            }
+        }
     }
 
     var currentData: [CurrentModel] = []
@@ -208,10 +216,11 @@ extension HomeViewController {
                     as? SectionHeader
             else { return nil }
 
-            //            guard let itemCount = self.dataSource?.snapshot().numberOfItems(inSection: .now) else {
-            //                return nil
-            //            }
-
+            guard let section = Section(rawValue: indexPath.section) else {
+                fatalError("Unknown section kind")
+            }
+            
+            sectionHeader.configure(title: section.description())
             return sectionHeader
         }
     }
@@ -220,7 +229,7 @@ extension HomeViewController {
 // MARK: - Setup layout
 extension HomeViewController {
     private func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
-        let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(20))
+        let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(30))
 
         let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: layoutSectionHeaderSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
@@ -267,6 +276,9 @@ extension HomeViewController {
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
         layoutSection.orthogonalScrollingBehavior = .continuous
         layoutSection.contentInsets = NSDirectionalEdgeInsets.init(top: 20, leading: 20, bottom: 20, trailing: 20)
+        
+        let header = createSectionHeader()
+        layoutSection.boundarySupplementaryItems = [header]
 
         return layoutSection
     }
@@ -283,6 +295,10 @@ extension HomeViewController {
 
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets.init(top: 20, leading: 20, bottom: 0, trailing: 20)
+        
+        let header = createSectionHeader()
+        section.boundarySupplementaryItems = [header]
+        
         return section
     }
 }
