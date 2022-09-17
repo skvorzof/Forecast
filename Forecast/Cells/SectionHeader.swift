@@ -8,16 +8,30 @@
 import UIKit
 
 class SectionHeader: UICollectionReusableView {
-    
-    private let txt: UILabel = {
+
+    private let titleHeader: UILabel = {
         let label = UILabel()
+        label.font = UIFont(name: "Rubik-Medium", size: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
+    private lazy var dayButton: UIButton = {
+        let button = UIButton()
+        button.setTitleColor(Color.blackColor, for: .normal)
+        button.addAction(
+            UIAction(handler: { [unowned self] (_) in
+                self.didTapButtonCallback?()
+            }), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
+    var didTapButtonCallback: (() -> Void)?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         setupView()
     }
 
@@ -27,18 +41,28 @@ class SectionHeader: UICollectionReusableView {
 
     override func prepareForReuse() {
         super.prepareForReuse()
+        dayButton.setAttributedTitle("".underLined, for: .normal)
     }
-    
+
     private func setupView() {
-        addSubview(txt)
-        
+        addSubview(titleHeader)
+        addSubview(dayButton)
+
         NSLayoutConstraint.activate([
-            txt.centerYAnchor.constraint(equalTo: centerYAnchor)
+            titleHeader.centerYAnchor.constraint(equalTo: centerYAnchor),
+
+            dayButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+            dayButton.trailingAnchor.constraint(equalTo: trailingAnchor),
         ])
     }
-    
-    func configure(title: String) {
-        txt.text = title
+
+    func configure(title: String, _ section: Int) {
+        titleHeader.text = title
+
+        if section == 1 {
+            dayButton.setAttributedTitle("24 часа".underLined, for: .normal)
+        } else if section == 2 {
+            dayButton.setAttributedTitle("25 суток".underLined, for: .normal)
+        }
     }
 }
-

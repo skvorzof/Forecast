@@ -7,12 +7,14 @@
 
 import UIKit
 
+// MARK: - Identifier Cell
 extension UIView {
     static var identifier: String {
         String(describing: self)
     }
 }
 
+// MARK: - Weathercode - иконки + описание
 extension Weathercode {
     var iconImage: String {
         switch weathercode {
@@ -50,5 +52,12 @@ extension Weathercode {
         case 96, 99: return "Гроза с легким и сильным градом"
         default: return "Смотри в окно"
         }
+    }
+}
+
+// MARK: - Нижнее подчёркивание для текста
+extension String {
+    var underLined: NSAttributedString {
+        NSMutableAttributedString(string: self, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
     }
 }

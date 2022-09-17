@@ -16,9 +16,9 @@ class HomeViewController: UIViewController {
 
         func description() -> String {
             switch self {
-            case .current: return "Current"
-            case .hourly: return "Hourly"
-            case .daily: return "Daily"
+            case .current: return ""
+            case .hourly: return "Прогноз на 7 часов"
+            case .daily: return "Ежедневный прогноз"
             }
         }
     }
@@ -142,6 +142,7 @@ class HomeViewController: UIViewController {
                 return self.createDailyWeather()
             }
         }
+
         return layout
     }
 
@@ -219,8 +220,15 @@ extension HomeViewController {
             guard let section = Section(rawValue: indexPath.section) else {
                 fatalError("Unknown section kind")
             }
-            
-            sectionHeader.configure(title: section.description())
+
+            sectionHeader.configure(title: section.description(), section.rawValue)
+            sectionHeader.didTapButtonCallback = { [unowned self] in
+                if section.rawValue == 1 {
+
+                } else if section.rawValue == 2 {
+
+                }
+            }
             return sectionHeader
         }
     }
@@ -229,7 +237,7 @@ extension HomeViewController {
 // MARK: - Setup layout
 extension HomeViewController {
     private func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
-        let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(30))
+        let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(60))
 
         let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: layoutSectionHeaderSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
@@ -255,9 +263,6 @@ extension HomeViewController {
         layoutSection.orthogonalScrollingBehavior = .groupPagingCentered
         layoutSection.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 12, bottom: 0, trailing: 12)
 
-        let header = createSectionHeader()
-        layoutSection.boundarySupplementaryItems = [header]
-
         return layoutSection
     }
 
@@ -275,8 +280,8 @@ extension HomeViewController {
 
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
         layoutSection.orthogonalScrollingBehavior = .continuous
-        layoutSection.contentInsets = NSDirectionalEdgeInsets.init(top: 20, leading: 20, bottom: 20, trailing: 20)
-        
+        layoutSection.contentInsets = NSDirectionalEdgeInsets.init(top: 10, leading: 20, bottom: 20, trailing: 20)
+
         let header = createSectionHeader()
         layoutSection.boundarySupplementaryItems = [header]
 
@@ -294,11 +299,11 @@ extension HomeViewController {
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets.init(top: 20, leading: 20, bottom: 0, trailing: 20)
-        
+        section.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 20, bottom: 0, trailing: 20)
+
         let header = createSectionHeader()
         section.boundarySupplementaryItems = [header]
-        
+
         return section
     }
 }
