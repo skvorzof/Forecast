@@ -39,11 +39,6 @@ class SectionHeader: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        dayButton.setAttributedTitle("".underLined, for: .normal)
-    }
-
     private func setupView() {
         addSubview(titleHeader)
         addSubview(dayButton)

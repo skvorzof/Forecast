@@ -107,7 +107,6 @@ class HomeViewController: UIViewController {
                 time: hourly.hourly.time[i],
                 temperature: hourly.hourly.temperature[i],
                 weathercode: hourly.hourly.weathercode[i])
-
             array.append(item)
         }
         return array
@@ -135,11 +134,11 @@ class HomeViewController: UIViewController {
 
             switch section {
             case .current:
-                return self.createCurrentWeather()
+                return self.createCurrentLayoutSection()
             case .hourly:
-                return self.createHourlyWeather()
+                return self.createHourlyLayoutSection()
             case .daily:
-                return self.createDailyWeather()
+                return self.createDailyLayoutSection()
             }
         }
 
@@ -236,7 +235,7 @@ extension HomeViewController {
 
 // MARK: - Setup layout
 extension HomeViewController {
-    private func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
+    private func createHeaderLayoutSection() -> NSCollectionLayoutBoundarySupplementaryItem {
         let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(60))
 
         let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
@@ -245,7 +244,7 @@ extension HomeViewController {
         return layoutSectionHeader
     }
 
-    private func createCurrentWeather() -> NSCollectionLayoutSection {
+    private func createCurrentLayoutSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
             heightDimension: .fractionalHeight(1))
@@ -266,7 +265,7 @@ extension HomeViewController {
         return layoutSection
     }
 
-    private func createHourlyWeather() -> NSCollectionLayoutSection {
+    private func createHourlyLayoutSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
             heightDimension: .fractionalHeight(1))
@@ -282,13 +281,13 @@ extension HomeViewController {
         layoutSection.orthogonalScrollingBehavior = .continuous
         layoutSection.contentInsets = NSDirectionalEdgeInsets.init(top: 10, leading: 20, bottom: 20, trailing: 20)
 
-        let header = createSectionHeader()
+        let header = createHeaderLayoutSection()
         layoutSection.boundarySupplementaryItems = [header]
 
         return layoutSection
     }
 
-    private func createDailyWeather() -> NSCollectionLayoutSection {
+    private func createDailyLayoutSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(86))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 0, bottom: 8, trailing: 0)
@@ -301,7 +300,7 @@ extension HomeViewController {
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 20, bottom: 0, trailing: 20)
 
-        let header = createSectionHeader()
+        let header = createHeaderLayoutSection()
         section.boundarySupplementaryItems = [header]
 
         return section
