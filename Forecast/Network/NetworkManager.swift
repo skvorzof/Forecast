@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 final class NetworkManager {
 
@@ -21,10 +22,9 @@ final class NetworkManager {
     private init() {}
 
     // MARK: - fetchWeather
-    func fetchWeather(lat: String, lon: String, completion: @escaping (WeatherModel) -> Void) {
-
-        let API_URL =
-            "https://api.open-meteo.com/v1/forecast?latitude=\(lat)&longitude=\(lon)&hourly=temperature_2m,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min&current_weather=true&timeformat=unixtime&timezone=Europe%2FMoscow"
+    func fetchWeather(location: CLLocation, completion: @escaping (WeatherModel) -> Void) {
+        let apiUrl =
+            "https://api.open-meteo.com/v1/forecast?latitude=\(location.coordinate.latitude)&longitude=\(location.coordinate.longitude)&hourly=temperature_2m,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min&current_weather=true&timeformat=unixtime&timezone=Europe%2FMoscow"
 
         guard let url = URL(string: mock) else {
             fatalError()

@@ -9,6 +9,8 @@
 		<string>Rubik-SemiBold.ttf</string>
 		<string>Rubik-Bold.ttf</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Пожалуйста дайте доступ к геолокации</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

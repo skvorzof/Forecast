@@ -5,9 +5,13 @@
 //  Created by Dima Skvortsov on 15.09.2022.
 //
 
+import CoreLocation
 import UIKit
 
 class HomeViewController: UIViewController {
+
+    var locationManager = CLLocationManager()
+    var currentLocation: CLLocation?
 
     enum Section: Int, CaseIterable {
         case current
@@ -16,7 +20,7 @@ class HomeViewController: UIViewController {
 
         func description() -> String {
             switch self {
-            case .current: return ""
+            case .current: return "Сейчас"
             case .hourly: return "Прогноз на 7 часов"
             case .daily: return "Ежедневный прогноз"
             }
@@ -57,10 +61,16 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         setupView()
-        loadData()
         createDataSource()
-        //        reloadData()
+    }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
     }
 
     private func setupView() {
@@ -72,10 +82,8 @@ class HomeViewController: UIViewController {
         view.addSubview(collectionView)
     }
 
-    private func loadData() {
-        // Moscow   lat: "55.7558", lon: "37.6176"
-
-        NetworkManager.share.fetchWeather(lat: "59.9342802", lon: "30.3350986") { [weak self] weather in
+    private func loadData(location: CLLocation) {
+        NetworkManager.share.fetchWeather(location: location) { [weak self] weather in
             guard let self = self else { return }
 
             self.currentData = self.prepareCurrentData(weather)
@@ -304,5 +312,17 @@ extension HomeViewController {
         section.boundarySupplementaryItems = [header]
 
         return section
+    }
+}
+
+// MARK: - Location
+extension HomeViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+
+        if !locations.isEmpty, currentLocation == nil {
+            currentLocation = locations.first
+            guard let currentLocation = currentLocation else { return }
+            loadData(location: currentLocation)
+        }
     }
 }
