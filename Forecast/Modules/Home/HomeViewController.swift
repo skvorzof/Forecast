@@ -75,7 +75,7 @@ class HomeViewController: UIViewController {
 
     private func setupView() {
         view.backgroundColor = .white
-        title = "Санкт-Петербург"
+        title = "..."
         navigationItem.leftBarButtonItem = settingsButton
         navigationItem.rightBarButtonItem = locationButton
 
@@ -323,6 +323,13 @@ extension HomeViewController: CLLocationManagerDelegate {
             currentLocation = locations.first
             guard let currentLocation = currentLocation else { return }
             loadData(location: currentLocation)
+
+            GeocodingManager.shared.fetchGeolocation(location: currentLocation) { [weak self] result in
+                guard let self = self else { return }
+                DispatchQueue.main.async {
+                    self.title = result
+                }
+            }
         }
     }
 }

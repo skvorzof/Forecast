@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C99885A528D8350000C3A892 /* GeocodingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99885A428D8350000C3A892 /* GeocodingManager.swift */; };
+		C99885A728D836AF00C3A892 /* GeocodingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99885A628D836AF00C3A892 /* GeocodingModel.swift */; };
 		C9B5B19A28D261D60022D48D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B5B19928D261D60022D48D /* AppDelegate.swift */; };
 		C9B5B19C28D261D60022D48D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B5B19B28D261D60022D48D /* SceneDelegate.swift */; };
 		C9B5B1A328D261D80022D48D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9B5B1A228D261D80022D48D /* Assets.xcassets */; };
@@ -34,6 +36,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C99885A428D8350000C3A892 /* GeocodingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingManager.swift; sourceTree = "<group>"; };
+		C99885A628D836AF00C3A892 /* GeocodingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingModel.swift; sourceTree = "<group>"; };
 		C9B5B19628D261D60022D48D /* Forecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Forecast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9B5B19928D261D60022D48D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9B5B19B28D261D60022D48D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				C9B5B1AE28D264000022D48D /* NetworkManager.swift */,
+				C99885A428D8350000C3A892 /* GeocodingManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -118,6 +123,7 @@
 		C9B5B1B028D264C30022D48D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C99885A628D836AF00C3A892 /* GeocodingModel.swift */,
 				C9B5B1B328D26B0A0022D48D /* WeatherModel.swift */,
 				C9B5B1DF28D39FCD0022D48D /* ForecastModel.swift */,
 			);
@@ -334,12 +340,14 @@
 				C9B5B20228D45B530022D48D /* SettingsViewController.swift in Sources */,
 				C9B5B1FF28D45B1A0022D48D /* OnboardingViewController.swift in Sources */,
 				C9B5B1ED28D3A0E30022D48D /* DailyCell.swift in Sources */,
+				C99885A728D836AF00C3A892 /* GeocodingModel.swift in Sources */,
 				C9B5B1E028D39FCD0022D48D /* ForecastModel.swift in Sources */,
 				C9B5B1F328D3A2580022D48D /* Protocols.swift in Sources */,
 				C9B5B1E428D3A02B0022D48D /* HomeViewController.swift in Sources */,
 				C9B5B1B428D26B0A0022D48D /* WeatherModel.swift in Sources */,
 				C9B5B20528D45B850022D48D /* AddLocationViewController.swift in Sources */,
 				C9B5B1E728D3A0600022D48D /* CurrentCell.swift in Sources */,
+				C99885A528D8350000C3A892 /* GeocodingManager.swift in Sources */,
 				C9B5B1F128D3A12D0022D48D /* SectionHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
