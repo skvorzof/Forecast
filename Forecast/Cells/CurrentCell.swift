@@ -19,7 +19,7 @@ class CurrentCell: UICollectionViewCell, SelfConfiguringCell {
         return customView
     }()
 
-    private let minMaxTemperatureLabel: UILabel = {
+    private let windSpeedLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.font = UIFont(name: "Rubik-Regular", size: 16)
@@ -66,7 +66,7 @@ class CurrentCell: UICollectionViewCell, SelfConfiguringCell {
     func configure<U>(with value: U) where U: Hashable {
         guard let value: CurrentModel = value as? CurrentModel else { return }
 
-        minMaxTemperatureLabel.text = "Скорость ветра \(value.windspeed)м/с"
+        windSpeedLabel.text = "Скорость ветра \(value.windspeed)м/с"
 
         temperatureLabel.text = "\(Int(value.temperature))°"
         descriptionLabel.text = "\(value.descriptionCode)"
@@ -78,7 +78,7 @@ class CurrentCell: UICollectionViewCell, SelfConfiguringCell {
 
     private func setupView() {
         addSubview(customView)
-        addSubview(minMaxTemperatureLabel)
+        addSubview(windSpeedLabel)
         addSubview(temperatureLabel)
         addSubview(descriptionLabel)
         addSubview(dateLabel)
@@ -89,10 +89,10 @@ class CurrentCell: UICollectionViewCell, SelfConfiguringCell {
             customView.leadingAnchor.constraint(equalTo: leadingAnchor),
             customView.trailingAnchor.constraint(equalTo: trailingAnchor),
 
-            minMaxTemperatureLabel.topAnchor.constraint(equalTo: customView.topAnchor, constant: 30),
-            minMaxTemperatureLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            windSpeedLabel.topAnchor.constraint(equalTo: customView.topAnchor, constant: 30),
+            windSpeedLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
 
-            temperatureLabel.topAnchor.constraint(equalTo: minMaxTemperatureLabel.bottomAnchor, constant: 10),
+            temperatureLabel.topAnchor.constraint(equalTo: windSpeedLabel.bottomAnchor, constant: 10),
             temperatureLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
 
             descriptionLabel.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor, constant: 10),

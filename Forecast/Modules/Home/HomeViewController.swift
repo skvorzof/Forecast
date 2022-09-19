@@ -54,6 +54,7 @@ class HomeViewController: UIViewController {
         collectionView.register(CurrentCell.self, forCellWithReuseIdentifier: CurrentCell.reusedId)
         collectionView.register(HourlyCell.self, forCellWithReuseIdentifier: HourlyCell.reusedId)
         collectionView.register(DailyCell.self, forCellWithReuseIdentifier: DailyCell.reusedId)
+        collectionView.delegate = self
         return collectionView
     }()
 
@@ -201,14 +202,8 @@ extension HomeViewController {
                 case .current:
                     return self.configure(collectionView: collectionView, cellType: CurrentCell.self, with: model, for: indexPath)
                 case .hourly:
-//                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourlyCell.reusedId, for: indexPath) as? HourlyCell
-//                    cell?.configureCell(with: model as! HourlyModel)
-//                    return cell
                     return self.configure(collectionView: collectionView, cellType: HourlyCell.self, with: model, for: indexPath)
                 case .daily:
-//                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DailyCell.reusedId, for: indexPath) as? DailyCell
-//                    cell?.configureCell(with: model as! DailyModel)
-//                    return cell
                     return self.configure(collectionView: collectionView, cellType: DailyCell.self, with: model, for: indexPath)
                 }
             })
@@ -229,7 +224,7 @@ extension HomeViewController {
                     let vc = HourlyDetailViewController()
                     navigationController?.pushViewController(vc, animated: true)
                 } else if section.rawValue == 2 {
-// 7 или 25 суток
+                    // 7 или 25 суток
                 }
             }
             return sectionHeader
@@ -308,6 +303,20 @@ extension HomeViewController {
         section.boundarySupplementaryItems = [header]
 
         return section
+    }
+}
+
+extension HomeViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let model = self.dataSource?.itemIdentifier(for: indexPath) as? DailyModel else { return }
+        guard let section = Section(rawValue: indexPath.section) else { return }
+
+        switch section {
+        case .daily:
+            let vc = DayForecastViewController(model: model)
+            navigationController?.pushViewController(vc, animated: true)
+        default: return
+        }
     }
 }
 

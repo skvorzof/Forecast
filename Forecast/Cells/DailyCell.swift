@@ -61,6 +61,7 @@ class DailyCell: UICollectionViewCell, SelfConfiguringCell {
 
     func configure<U>(with value: U) where U: Hashable {
         guard let value: DailyModel = value as? DailyModel else { return }
+        
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM"
         dateLabel.text = formatter.string(from: Date(timeIntervalSince1970: TimeInterval(value.time)))
