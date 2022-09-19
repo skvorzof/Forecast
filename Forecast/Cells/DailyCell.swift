@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DailyCell: UICollectionViewCell {
+class DailyCell: UICollectionViewCell, SelfConfiguringCell {
 
     static var reusedId = DailyCell.identifier
 
@@ -59,7 +59,8 @@ class DailyCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configureCell(with value: DailyModel) {
+    func configure<U>(with value: U) where U: Hashable {
+        guard let value: DailyModel = value as? DailyModel else { return }
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM"
         dateLabel.text = formatter.string(from: Date(timeIntervalSince1970: TimeInterval(value.time)))
@@ -69,6 +70,7 @@ class DailyCell: UICollectionViewCell {
         descriptionLabel.text = value.descriptionCode
 
         temperatureLabel.text = "\(Int(value.temperatureMin))°/\(Int(value.temperatureMax))°"
+
     }
 
     private func setupView() {

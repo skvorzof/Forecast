@@ -96,6 +96,15 @@ class HomeViewController: UIViewController {
         }
     }
 
+    private func getGeocoding(location: CLLocation) {
+        GeocodingManager.shared.fetchGeolocation(location: location) { [weak self] result in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.title = result
+            }
+        }
+    }
+
     // MARK: - PrepareData
     private func prepareCurrentData(_ current: WeatherModel) -> [CurrentModel] {
         var array: [CurrentModel] = []
@@ -180,22 +189,6 @@ class HomeViewController: UIViewController {
 // MARK: - Datasource
 extension HomeViewController {
 
-    private func configure<T: SelfConfiguringCell>(
-        cellType: T.Type,
-        with value: CurrentModel,
-        for indexPath: IndexPath
-    ) -> T {
-        guard
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: cellType.reusedId,
-                for: indexPath) as? T
-        else {
-            fatalError("Unable to dequeue \(cellType)")
-        }
-        cell.configure(with: value)
-        return cell
-    }
-
     private func createDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, AnyHashable>(
             collectionView: collectionView,
@@ -206,15 +199,17 @@ extension HomeViewController {
 
                 switch section {
                 case .current:
-                    return self.configure(cellType: CurrentCell.self, with: model as! CurrentModel, for: indexPath)
+                    return self.configure(collectionView: collectionView, cellType: CurrentCell.self, with: model, for: indexPath)
                 case .hourly:
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourlyCell.reusedId, for: indexPath) as? HourlyCell
-                    cell?.configureCell(with: model as! HourlyModel)
-                    return cell
+//                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourlyCell.reusedId, for: indexPath) as? HourlyCell
+//                    cell?.configureCell(with: model as! HourlyModel)
+//                    return cell
+                    return self.configure(collectionView: collectionView, cellType: HourlyCell.self, with: model, for: indexPath)
                 case .daily:
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DailyCell.reusedId, for: indexPath) as? DailyCell
-                    cell?.configureCell(with: model as! DailyModel)
-                    return cell
+//                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DailyCell.reusedId, for: indexPath) as? DailyCell
+//                    cell?.configureCell(with: model as! DailyModel)
+//                    return cell
+                    return self.configure(collectionView: collectionView, cellType: DailyCell.self, with: model, for: indexPath)
                 }
             })
 
@@ -231,9 +226,10 @@ extension HomeViewController {
             sectionHeader.configure(title: section.description(), section.rawValue)
             sectionHeader.didTapButtonCallback = { [unowned self] in
                 if section.rawValue == 1 {
-
+                    let vc = HourlyDetailViewController()
+                    navigationController?.pushViewController(vc, animated: true)
                 } else if section.rawValue == 2 {
-
+// 7 или 25 суток
                 }
             }
             return sectionHeader
@@ -322,14 +318,8 @@ extension HomeViewController: CLLocationManagerDelegate {
         if !locations.isEmpty, currentLocation == nil {
             currentLocation = locations.first
             guard let currentLocation = currentLocation else { return }
+            getGeocoding(location: currentLocation)
             loadData(location: currentLocation)
-
-            GeocodingManager.shared.fetchGeolocation(location: currentLocation) { [weak self] result in
-                guard let self = self else { return }
-                DispatchQueue.main.async {
-                    self.title = result
-                }
-            }
         }
     }
 }

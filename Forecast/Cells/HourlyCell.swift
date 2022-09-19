@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HourlyCell: UICollectionViewCell {
+class HourlyCell: UICollectionViewCell, SelfConfiguringCell {
 
     static var reusedId = HourlyCell.identifier
 
@@ -41,7 +41,9 @@ class HourlyCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configureCell(with value: HourlyModel) {
+    func configure<U>(with value: U) where U: Hashable {
+        guard let value: HourlyModel = value as? HourlyModel else { return }
+
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         timeLabel.text = formatter.string(from: Date(timeIntervalSince1970: TimeInterval(value.time)))

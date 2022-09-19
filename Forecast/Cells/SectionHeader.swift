@@ -57,7 +57,7 @@ class SectionHeader: UICollectionReusableView {
         if section == 1 {
             dayButton.setAttributedTitle("24 часа".underLined, for: .normal)
         } else if section == 2 {
-            dayButton.setAttributedTitle("25 суток".underLined, for: .normal)
+            dayButton.setAttributedTitle("7 суток".underLined, for: .normal)
         }
     }
 }

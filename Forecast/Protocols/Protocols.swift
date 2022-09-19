@@ -7,7 +7,7 @@
 
 protocol SelfConfiguringCell {
     static var reusedId: String { get }
-    func configure(with value: CurrentModel)
+    func configure<U: Hashable>(with value: U)
 }
 
 protocol Weathercode {

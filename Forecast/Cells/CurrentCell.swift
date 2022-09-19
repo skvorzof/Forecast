@@ -63,7 +63,9 @@ class CurrentCell: UICollectionViewCell, SelfConfiguringCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(with value: CurrentModel) {
+    func configure<U>(with value: U) where U: Hashable {
+        guard let value: CurrentModel = value as? CurrentModel else { return }
+
         minMaxTemperatureLabel.text = "Скорость ветра \(value.windspeed)м/с"
 
         temperatureLabel.text = "\(Int(value.temperature))°"
