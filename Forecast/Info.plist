@@ -10,7 +10,7 @@
 		<string>Rubik-Bold.ttf</string>
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Пожалуйста дайте доступ к геолокации</string>
+	<string>Пожалуйста дайте доступ к геолокации для Forecast</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
