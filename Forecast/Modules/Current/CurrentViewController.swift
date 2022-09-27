@@ -214,7 +214,7 @@ extension CurrentViewController {
                     let vc = HourlyDetailViewController()
                     navigationController?.pushViewController(vc, animated: true)
                 } else if section.rawValue == 2 {
-                    // 7 или 25 суток
+                    //TODO: - 7 или 25 суток
                 }
             }
             return sectionHeader

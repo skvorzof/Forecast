@@ -8,6 +8,7 @@
 import CoreLocation
 import UIKit
 
+// MARK: - UIPageViewController
 class HomeViewController: UIPageViewController {
 
     var currentViewControllers: [CurrentLocation] = []
@@ -139,6 +140,7 @@ extension HomeViewController: UIPageViewControllerDataSource {
     }
 }
 
+// MARK: - UIPageViewControllerDelegate
 extension HomeViewController: UIPageViewControllerDelegate {
     func pageViewController(
         _ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController],
