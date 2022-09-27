@@ -84,7 +84,7 @@ class HomeViewController: UIPageViewController {
     @objc
     private func didTapLocationButton() {
         let vc = OnboardingViewController()
-        //        vc.modalPresentationStyle = .fullScreen
+        vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
 

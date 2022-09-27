@@ -5,10 +5,14 @@
 //  Created by Dima Skvortsov on 16.09.2022.
 //
 
+import CoreLocation
 import UIKit
 
 // MARK: - OnboardingViewController
 class OnboardingViewController: UIViewController {
+    
+    var locationManager = CLLocationManager()
+    var location: CLLocation?
     
     private let womanumbrellaElement: UIImageView = {
         let imageView = UIImageView()
@@ -58,6 +62,7 @@ class OnboardingViewController: UIViewController {
         button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Использовать местоположение устройства".uppercased(), for: .normal)
+        button.addTarget(self, action: #selector(didTatYesButton), for: .touchUpInside)
         return button
     }()
     
@@ -74,13 +79,35 @@ class OnboardingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         setupView()
+        
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        locationManager.startUpdatingLocation()
+    }
+    
+    @objc
+    private func didTatYesButton() {
+        locationManager.requestWhenInUseAuthorization()
+        dismiss(animated: true)
     }
     
     @objc
     private func didTapNotButton() {
         let vc = AddLocationViewController()
+        vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
+    }
+    
+    private func getGeocoding(location: CLLocation) {
+        GeocodingManager.shared.fetchGeolocation(location: location) { [weak self] result in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.title = result
+            }
+        }
     }
     
     private func setupView() {
@@ -121,5 +148,15 @@ class OnboardingViewController: UIViewController {
             notButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             notButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
         ])
+    }
+}
+
+
+// MARK: - Location
+extension OnboardingViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.first else { return }
+
+        getGeocoding(location: location)
     }
 }

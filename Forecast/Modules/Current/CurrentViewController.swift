@@ -10,9 +10,6 @@ import UIKit
 
 class CurrentViewController: UIViewController {
 
-    var locationManager = CLLocationManager()
-    var location: CLLocation?
-
     let currentLocation: CurrentLocation
 
     enum Section: Int, CaseIterable {
@@ -65,11 +62,6 @@ class CurrentViewController: UIViewController {
         setupView()
         createDataSource()
         //        reloadData()
-
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
     }
 
     private func setupView() {
@@ -96,15 +88,6 @@ class CurrentViewController: UIViewController {
 
             DispatchQueue.main.async {
                 self.reloadData()
-            }
-        }
-    }
-
-    private func getGeocoding(location: CLLocation) {
-        GeocodingManager.shared.fetchGeolocation(location: location) { [weak self] result in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.title = result
             }
         }
     }
@@ -308,15 +291,5 @@ extension CurrentViewController: UICollectionViewDelegate {
             navigationController?.pushViewController(vc, animated: true)
         default: return
         }
-    }
-}
-
-// MARK: - Location
-extension CurrentViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.first else { return }
-
-        getGeocoding(location: location)
-        loadData(location: location)
     }
 }
