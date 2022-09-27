@@ -81,3 +81,17 @@ extension UIViewController {
         return cell
     }
 }
+
+// MARK: - Bool -> Int
+extension Bool {
+    var intValue: Int {
+        return self ? 1 : 0
+    }
+}
+
+// MARK: - C° to F°
+extension Double {
+    var fahrenheit: String {
+        return String(Int(self * 9 / 5 + 32))
+    }
+}

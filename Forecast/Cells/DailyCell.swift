@@ -70,7 +70,9 @@ class DailyCell: UICollectionViewCell, SelfConfiguringCell {
 
         descriptionLabel.text = value.descriptionCode
 
-        temperatureLabel.text = "\(Int(value.temperatureMin))°/\(Int(value.temperatureMax))°"
+        let temperatureMin = SettingsApp.temperatureUnit ? value.temperatureMin.fahrenheit + "°" : String(Int(value.temperatureMin)) + "°"
+        let temperatureMax = SettingsApp.temperatureUnit ? value.temperatureMax.fahrenheit + "°" : String(Int(value.temperatureMax)) + "°"
+        temperatureLabel.text = "\(temperatureMin)/\(temperatureMax)"
 
     }
 

@@ -45,11 +45,14 @@ class HourlyCell: UICollectionViewCell, SelfConfiguringCell {
         guard let value: HourlyModel = value as? HourlyModel else { return }
 
         let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
+        let timeFormat = SettingsApp.timeformatUnit ? "HH:mm" : "h:mm a"
+        formatter.dateFormat = timeFormat
         timeLabel.text = formatter.string(from: Date(timeIntervalSince1970: TimeInterval(value.time)))
 
         iconWeather.image = UIImage(systemName: value.iconImage)
-        temperatureLabel.text = "\(Int(value.temperature))°"
+        
+        let temperature = SettingsApp.temperatureUnit ? value.temperature.fahrenheit + "°" : String(Int(value.temperature)) + "°"
+        temperatureLabel.text = temperature
     }
 
     private func setupView() {

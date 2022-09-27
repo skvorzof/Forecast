@@ -37,6 +37,7 @@ class SettingsViewController: UIViewController {
 
     private lazy var temperatureSwitch: CustomSegmentedControl = {
         let control = CustomSegmentedControl(segments: ["C", "F"])
+        control.selectedSegmentIndex = SettingsApp.temperatureUnit.intValue
         return control
     }()
 
@@ -51,6 +52,7 @@ class SettingsViewController: UIViewController {
 
     private lazy var windSpeedSwitch: CustomSegmentedControl = {
         let control = CustomSegmentedControl(segments: ["Mi", "Km"])
+        control.selectedSegmentIndex = SettingsApp.windspeedUnit.intValue
         return control
     }()
 
@@ -65,6 +67,7 @@ class SettingsViewController: UIViewController {
 
     private lazy var timeFormatSwitch: CustomSegmentedControl = {
         let control = CustomSegmentedControl(segments: ["12", "24"])
+        control.selectedSegmentIndex = SettingsApp.timeformatUnit.intValue
         return control
     }()
 
@@ -79,6 +82,7 @@ class SettingsViewController: UIViewController {
 
     private lazy var notificationsSwitch: CustomSegmentedControl = {
         let control = CustomSegmentedControl(segments: ["On", "Off"])
+        control.selectedSegmentIndex = SettingsApp.notificationUnit.intValue
         return control
     }()
 
@@ -132,11 +136,35 @@ class SettingsViewController: UIViewController {
         temperatureSwitch.segmentedDidChanged = { sender in
             switch sender.selectedSegmentIndex {
             case 0:
-                break
+                SettingsApp.temperatureUnit = false
             case 1:
-                break
+                SettingsApp.temperatureUnit = true
             default:
                 break
+            }
+        }
+
+        windSpeedSwitch.segmentedDidChanged = { sender in
+            if sender.selectedSegmentIndex == 0 {
+                SettingsApp.windspeedUnit = false
+            } else {
+                SettingsApp.windspeedUnit = true
+            }
+        }
+        
+        timeFormatSwitch.segmentedDidChanged = { sender in
+            if sender.selectedSegmentIndex == 0 {
+                SettingsApp.timeformatUnit = false
+            } else {
+                SettingsApp.timeformatUnit = true
+            }
+        }
+        
+        notificationsSwitch.segmentedDidChanged = { sender in
+            if sender.selectedSegmentIndex == 0 {
+                SettingsApp.notificationUnit = false
+            } else {
+                SettingsApp.notificationUnit = true
             }
         }
     }

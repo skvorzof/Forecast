@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C93C97B528E0BE9A0070A383 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93C97B428E0BE9A0070A383 /* HomeViewController.swift */; };
 		C93C97B728E0C5020070A383 /* CurrentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93C97B628E0C5020070A383 /* CurrentLocation.swift */; };
+		C993AA4228E1D87E00BE415F /* SettingsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C993AA4128E1D87E00BE415F /* SettingsApp.swift */; };
 		C99885A528D8350000C3A892 /* GeocodingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99885A428D8350000C3A892 /* GeocodingManager.swift */; };
 		C99885A728D836AF00C3A892 /* GeocodingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99885A628D836AF00C3A892 /* GeocodingModel.swift */; };
 		C99885AA28D876C300C3A892 /* HourlyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99885A928D876C300C3A892 /* HourlyDetailViewController.swift */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		C93C97B428E0BE9A0070A383 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C93C97B628E0C5020070A383 /* CurrentLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocation.swift; sourceTree = "<group>"; };
+		C993AA4128E1D87E00BE415F /* SettingsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsApp.swift; sourceTree = "<group>"; };
 		C99885A428D8350000C3A892 /* GeocodingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingManager.swift; sourceTree = "<group>"; };
 		C99885A628D836AF00C3A892 /* GeocodingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingModel.swift; sourceTree = "<group>"; };
 		C99885A928D876C300C3A892 /* HourlyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyDetailViewController.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				C9B5B20C28D45CED0022D48D /* Resource */,
 				C9B5B20D28D45D190022D48D /* Common */,
 				C9B5B1A728D261D80022D48D /* Info.plist */,
+				C993AA4128E1D87E00BE415F /* SettingsApp.swift */,
 			);
 			path = Forecast;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				C9B5B1EB28D3A0B90022D48D /* Color.swift in Sources */,
 				C9B5B19A28D261D60022D48D /* AppDelegate.swift in Sources */,
 				C9B5B19C28D261D60022D48D /* SceneDelegate.swift in Sources */,
+				C993AA4228E1D87E00BE415F /* SettingsApp.swift in Sources */,
 				C9B5B1EF28D3A0FE0022D48D /* HourlyCell.swift in Sources */,
 				C9B5B20228D45B530022D48D /* SettingsViewController.swift in Sources */,
 				C9B5B1FF28D45B1A0022D48D /* OnboardingViewController.swift in Sources */,
@@ -452,7 +456,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -506,7 +510,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

@@ -68,11 +68,14 @@ class CurrentCell: UICollectionViewCell, SelfConfiguringCell {
 
         windSpeedLabel.text = "Скорость ветра \(value.windspeed)м/с"
 
-        temperatureLabel.text = "\(Int(value.temperature))°"
+        let temperature = SettingsApp.temperatureUnit ? value.temperature.fahrenheit + "° F" : String(Int(value.temperature)) + "° C"
+        temperatureLabel.text = temperature
+
         descriptionLabel.text = "\(value.descriptionCode)"
 
         let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm, EE d MMMM"
+        let timeFormat = SettingsApp.timeformatUnit ? "HH:mm, EE d MMMM" : "h:mm a, EE d MMMM"
+        formatter.dateFormat = timeFormat
         dateLabel.text = formatter.string(from: Date(timeIntervalSince1970: TimeInterval(value.time)))
     }
 
