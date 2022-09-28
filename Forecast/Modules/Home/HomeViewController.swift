@@ -8,9 +8,10 @@
 import CoreLocation
 import UIKit
 
+// MARK: - UIPageViewController
 class HomeViewController: UIPageViewController {
 
-    var currentViewControllers: [CurrentLocation] = []
+    var currentLocations: [CurrentLocation] = []
 
     let pageControl = UIPageControl()
 
@@ -29,7 +30,7 @@ class HomeViewController: UIPageViewController {
     private lazy var arrayCurrentControllers: [CurrentViewController] = {
         var controllers: [CurrentViewController] = []
 
-        for vc in currentViewControllers {
+        for vc in currentLocations {
             controllers.append(CurrentViewController(currentLocation: vc))
         }
         return controllers
@@ -52,8 +53,8 @@ class HomeViewController: UIPageViewController {
         let one = CurrentLocation(city: "Москва", location: CLLocation(latitude: 55.751244, longitude: 37.618423))
         let two = CurrentLocation(city: "Санкт-Петербург", location: CLLocation(latitude: 59.937500, longitude: 30.308611))
 
-        currentViewControllers.append(one)
-        currentViewControllers.append(two)
+        currentLocations.append(one)
+        currentLocations.append(two)
 
         configure()
         setupView()
@@ -68,7 +69,7 @@ class HomeViewController: UIPageViewController {
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         pageControl.currentPageIndicatorTintColor = .black
         pageControl.pageIndicatorTintColor = .systemGray2
-        pageControl.numberOfPages = currentViewControllers.count
+        pageControl.numberOfPages = currentLocations.count
         pageControl.currentPage = 0
         pageControl.addTarget(self, action: #selector(pageControlTapped(_:)), for: .valueChanged)
     }
@@ -83,7 +84,7 @@ class HomeViewController: UIPageViewController {
     @objc
     private func didTapLocationButton() {
         let vc = OnboardingViewController()
-        //        vc.modalPresentationStyle = .fullScreen
+        vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
 
@@ -111,7 +112,7 @@ class HomeViewController: UIPageViewController {
     }
 
     private func setupTitle(_ index: Int) {
-        navigationItem.title = currentViewControllers[index].city
+        navigationItem.title = currentLocations[index].city
     }
 }
 
@@ -131,7 +132,7 @@ extension HomeViewController: UIPageViewControllerDataSource {
         guard let vc = viewController as? CurrentViewController else { return nil }
 
         if let index = arrayCurrentControllers.firstIndex(of: vc) {
-            if index < currentViewControllers.count - 1 {
+            if index < currentLocations.count - 1 {
                 return arrayCurrentControllers[index + 1]
             }
         }
@@ -139,6 +140,7 @@ extension HomeViewController: UIPageViewControllerDataSource {
     }
 }
 
+// MARK: - UIPageViewControllerDelegate
 extension HomeViewController: UIPageViewControllerDelegate {
     func pageViewController(
         _ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController],
@@ -152,7 +154,7 @@ extension HomeViewController: UIPageViewControllerDelegate {
     }
 
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return currentViewControllers.count
+        return currentLocations.count
     }
 
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
