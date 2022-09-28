@@ -11,7 +11,7 @@
 		C93C97B728E0C5020070A383 /* CurrentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93C97B628E0C5020070A383 /* CurrentLocation.swift */; };
 		C993AA4228E1D87E00BE415F /* SettingsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C993AA4128E1D87E00BE415F /* SettingsApp.swift */; };
 		C99885A528D8350000C3A892 /* GeocodingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99885A428D8350000C3A892 /* GeocodingManager.swift */; };
-		C99885A728D836AF00C3A892 /* GeocodingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99885A628D836AF00C3A892 /* GeocodingModel.swift */; };
+		C99885A728D836AF00C3A892 /* ReverseGeocodingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99885A628D836AF00C3A892 /* ReverseGeocodingModel.swift */; };
 		C99885AA28D876C300C3A892 /* HourlyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99885A928D876C300C3A892 /* HourlyDetailViewController.swift */; };
 		C99885AD28D877E200C3A892 /* DayForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99885AC28D877E200C3A892 /* DayForecastViewController.swift */; };
 		C99885AF28D8919A00C3A892 /* DateForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99885AE28D8919A00C3A892 /* DateForecastCell.swift */; };
@@ -39,6 +39,7 @@
 		C9B5B20228D45B530022D48D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B5B20128D45B530022D48D /* SettingsViewController.swift */; };
 		C9B5B20528D45B850022D48D /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B5B20428D45B850022D48D /* AddLocationViewController.swift */; };
 		C9B5B20A28D45C500022D48D /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B5B20928D45C500022D48D /* CustomSegmentedControl.swift */; };
+		C9DBB18328E3723E0024C80F /* ForwardGeocodingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9DBB18228E3723E0024C80F /* ForwardGeocodingModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +47,7 @@
 		C93C97B628E0C5020070A383 /* CurrentLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocation.swift; sourceTree = "<group>"; };
 		C993AA4128E1D87E00BE415F /* SettingsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsApp.swift; sourceTree = "<group>"; };
 		C99885A428D8350000C3A892 /* GeocodingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingManager.swift; sourceTree = "<group>"; };
-		C99885A628D836AF00C3A892 /* GeocodingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingModel.swift; sourceTree = "<group>"; };
+		C99885A628D836AF00C3A892 /* ReverseGeocodingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseGeocodingModel.swift; sourceTree = "<group>"; };
 		C99885A928D876C300C3A892 /* HourlyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyDetailViewController.swift; sourceTree = "<group>"; };
 		C99885AC28D877E200C3A892 /* DayForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayForecastViewController.swift; sourceTree = "<group>"; };
 		C99885AE28D8919A00C3A892 /* DateForecastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateForecastCell.swift; sourceTree = "<group>"; };
@@ -76,6 +77,7 @@
 		C9B5B20128D45B530022D48D /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		C9B5B20428D45B850022D48D /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		C9B5B20928D45C500022D48D /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
+		C9DBB18228E3723E0024C80F /* ForwardGeocodingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwardGeocodingModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,10 +162,11 @@
 		C9B5B1B028D264C30022D48D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C99885A628D836AF00C3A892 /* GeocodingModel.swift */,
+				C99885A628D836AF00C3A892 /* ReverseGeocodingModel.swift */,
 				C9B5B1B328D26B0A0022D48D /* WeatherModel.swift */,
 				C9B5B1DF28D39FCD0022D48D /* ForecastModel.swift */,
 				C93C97B628E0C5020070A383 /* CurrentLocation.swift */,
+				C9DBB18228E3723E0024C80F /* ForwardGeocodingModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -376,13 +379,14 @@
 				C9B5B20228D45B530022D48D /* SettingsViewController.swift in Sources */,
 				C9B5B1FF28D45B1A0022D48D /* OnboardingViewController.swift in Sources */,
 				C9B5B1ED28D3A0E30022D48D /* DailyCell.swift in Sources */,
-				C99885A728D836AF00C3A892 /* GeocodingModel.swift in Sources */,
+				C99885A728D836AF00C3A892 /* ReverseGeocodingModel.swift in Sources */,
 				C99885AD28D877E200C3A892 /* DayForecastViewController.swift in Sources */,
 				C99885B128D8996900C3A892 /* MainForecastCell.swift in Sources */,
 				C99885AF28D8919A00C3A892 /* DateForecastCell.swift in Sources */,
 				C9B5B1E028D39FCD0022D48D /* ForecastModel.swift in Sources */,
 				C99885AA28D876C300C3A892 /* HourlyDetailViewController.swift in Sources */,
 				C9B5B1F328D3A2580022D48D /* Protocols.swift in Sources */,
+				C9DBB18328E3723E0024C80F /* ForwardGeocodingModel.swift in Sources */,
 				C9B5B1E428D3A02B0022D48D /* CurrentViewController.swift in Sources */,
 				C9B5B1B428D26B0A0022D48D /* WeatherModel.swift in Sources */,
 				C9B5B20528D45B850022D48D /* AddLocationViewController.swift in Sources */,
